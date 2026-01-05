@@ -1,1 +1,1 @@
-# 3-tier-architecture-on-aws-using-terraform
+# 3-Tier-Architecture-On-AWS-Using-Terraform

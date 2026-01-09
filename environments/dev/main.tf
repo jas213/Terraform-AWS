@@ -29,3 +29,20 @@ module "ng" {
   subnet_ids = module.subnet.public_subnet_ids
   allocation_ids = module.elastic_ip.allocation_ids
 }
+
+#Create Route Tables
+module "route_table" {
+  source = "../../modules/route_table"
+  vpc_id          = module.vpc.vpc_id
+  igw_id          = module.ig.igw_id
+  nat_gateway_ids = module.ng.nat_gateway_ids
+}
+
+#Create Route Table Association
+module "route_table_association" {
+  source = "../../modules/route_table_association"
+  public_subnet_ids        = module.subnet.public_subnet_ids
+  private_subnet_ids       = module.subnet.private_subnet_ids
+  public_route_table_id    = module.route_table.public_route_table_id
+  private_route_table_ids  = module.route_table.private_route_table_ids
+}
